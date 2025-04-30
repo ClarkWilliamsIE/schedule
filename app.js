@@ -1,9 +1,4 @@
-// Import necessary Firebase SDKs
-import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
-// Your Firebase config
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCKSQ9w5hLdz1DPxFe81rchy37wwllzzOw",
   authDomain: "makerspace-timetable.firebaseapp.com",
@@ -15,9 +10,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); // Firebase Auth
-const db = getFirestore(app); // Firestore for data storage
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
 
 // Login function
 const loginButton = document.getElementById("login-button");
@@ -25,7 +20,7 @@ loginButton.addEventListener("click", () => {
   const email = prompt("Enter your email:");
   const password = prompt("Enter your password:");
 
-  signInWithEmailAndPassword(auth, email, password)
+  auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in successfully
       const user = userCredential.user;
