@@ -14,20 +14,27 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Get elements
-const timeBlocks = document.querySelectorAll('.time-block');
+const dayBlocks = document.querySelectorAll('.day-block');
 
 // Fetch schedule from Firestore
-db.collection('schedule').get().then(snapshot => {
-  snapshot.forEach(doc => {
-    const day = doc.id;
+const days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+days.forEach(day => {
+  const dayBlock = document.getElementById(day);
+
+  db.collection('schedule').doc(day).get().then(doc => {
     const daySchedule = doc.data();
-    
+
     for (let time in daySchedule) {
-      const staffMember = daySchedule[time];
-      const block = document.querySelector(`#${day} .time-block[data-time="${time}"]`);
-      if (block) {
-        block.textContent = `${time} - ${staffMember}`;
-      }
+      const staffMember = daySchedule[time].name;
+      const color = daySchedule[time].color;
+
+      const timeBlock = document.createElement('div');
+      timeBlock.classList.add('time-block');
+      timeBlock.setAttribute('data-time', time);
+      timeBlock.textContent = `${time} - ${staffMember}`;
+      timeBlock.style.backgroundColor = color;
+
+      dayBlock.appendChild(timeBlock);
     }
   });
 });
