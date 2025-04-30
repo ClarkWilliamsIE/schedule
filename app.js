@@ -20,6 +20,12 @@ loginButton.addEventListener("click", () => {
   const email = prompt("Enter your email:");
   const password = prompt("Enter your password:");
 
+  // Check if email and password are valid
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
+
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in successfully
@@ -40,6 +46,12 @@ const signupButton = document.getElementById("signup-button");
 signupButton.addEventListener("click", () => {
   const email = prompt("Enter your email:");
   const password = prompt("Enter your password:");
+
+  // Check if email and password are valid
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
 
   // Create new user with email and password
   firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -62,3 +74,4 @@ function loadCalendar() {
   // Code to load and display calendar
   console.log("Calendar should load here.");
 }
+
