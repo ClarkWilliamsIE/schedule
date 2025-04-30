@@ -12,48 +12,55 @@ body {
   color: #333;
   text-align: center;
   padding: 20px;
+  background: linear-gradient(135deg, #4d7cfe, #63a1fe); /* Light gradient for the body */
 }
 
 /* Title Styling */
 h1 {
   font-size: 2.5em;
-  color: #333;
+  color: #fff;
   margin-bottom: 20px;
 }
 
 /* Container for Week Planner */
 #week-planner {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 equal columns for Monday to Friday */
+  grid-gap: 15px;
   margin-top: 20px;
-  gap: 15px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.8); /* Subtle white background with opacity */
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Days of the Week */
 #days-of-week {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  margin-right: 20px;
+  margin-bottom: 10px;
 }
 
-/* Styling for each day */
 .day {
-  background-color: #444;
+  background-color: #5f75f8;
   color: white;
-  font-size: 1.2em;
+  font-size: 1.4em;
   padding: 10px;
-  margin-bottom: 5px;
   border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-/* Time Blocks */
+.day:hover {
+  background-color: #4a63d5; /* Darker blue on hover */
+}
+
+/* Time Blocks Container */
 #time-blocks {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(16, 50px); /* 16 time slots (half-hour intervals from 9am to 5pm) */
   grid-gap: 10px;
-  max-width: 800px;
+  padding: 10px;
 }
 
 /* Styling for each time block */
@@ -61,20 +68,20 @@ h1 {
   background-color: #fff;
   border: 2px solid #ccc;
   border-radius: 5px;
-  padding: 15px;
+  padding: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   text-align: center;
   font-weight: bold;
-  min-height: 100px;
 }
 
 .time-block:hover {
-  background-color: #e6e6e6;
+  background-color: #dfe3f0; /* Light blue on hover */
+  transform: scale(1.05);
 }
 
 .time-block:active {
-  background-color: #d1d1d1;
+  background-color: #c0c6ea; /* Slightly darker when clicked */
 }
 
 /* Dropdown for Staff Selection */
@@ -87,6 +94,12 @@ h1 {
   font-size: 1.1em;
   border-radius: 5px;
   border: 2px solid #ccc;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+#staff:focus {
+  background-color: #e6e6f3; /* Subtle light blue background when focused */
 }
 
 /* Save Button */
@@ -105,21 +118,18 @@ h1 {
   background-color: #4cae4c;
 }
 
-/* View-Only Styling */
-#view-only {
-  margin-top: 50px;
-  font-size: 1.2em;
-  color: #444;
+#save-schedule:active {
+  background-color: #399c39;
 }
 
 /* Make everything mobile-friendly */
 @media (max-width: 768px) {
   #week-planner {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 
   #time-blocks {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(32, 50px); /* Adjust for mobile view */
   }
 }
+
