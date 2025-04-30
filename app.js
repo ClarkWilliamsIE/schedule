@@ -35,6 +35,28 @@ loginButton.addEventListener("click", () => {
     });
 });
 
+// Sign Up function
+const signupButton = document.getElementById("signup-button");
+signupButton.addEventListener("click", () => {
+  const email = prompt("Enter your email:");
+  const password = prompt("Enter your password:");
+
+  // Create new user with email and password
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Successfully created user
+      const user = userCredential.user;
+      alert("Account created successfully! Logged in as: " + user.email);
+      // Hide login and show calendar
+      document.getElementById("login-container").style.display = "none";
+      document.getElementById("calendar-container").style.display = "block";
+      loadCalendar(); // Call a function to load calendar after sign-up
+    })
+    .catch((error) => {
+      alert("Error creating account: " + error.message);
+    });
+});
+
 // Calendar loading function (just a placeholder here)
 function loadCalendar() {
   // Code to load and display calendar
