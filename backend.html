@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Week Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Staff Week Planner (Editable)</h1>
+
+  <div id="week-planner">
+    <!-- Days of the Week -->
+    <div id="days-of-week">
+      <div class="day" id="monday">Monday</div>
+      <div class="day" id="tuesday">Tuesday</div>
+      <div class="day" id="wednesday">Wednesday</div>
+      <div class="day" id="thursday">Thursday</div>
+      <div class="day" id="friday">Friday</div>
+      <div class="day" id="saturday">Saturday</div>
+      <div class="day" id="sunday">Sunday</div>
+    </div>
+
+    <!-- Time Blocks -->
+    <div id="time-blocks">
+      <div class="time-block" data-time="08:00 - 10:00">08:00 - 10:00</div>
+      <div class="time-block" data-time="10:00 - 12:00">10:00 - 12:00</div>
+      <div class="time-block" data-time="12:00 - 14:00">12:00 - 14:00</div>
+      <div class="time-block" data-time="14:00 - 16:00">14:00 - 16:00</div>
+      <div class="time-block" data-time="16:00 - 18:00">16:00 - 18:00</div>
+    </div>
+  </div>
+
+  <!-- Dropdown for Staff Selection -->
+  <div id="staff-selector">
+    <label for="staff">Select Staff Member:</label>
+    <select id="staff">
+      <option value="staff1">Staff 1</option>
+      <option value="staff2">Staff 2</option>
+      <option value="staff3">Staff 3</option>
+      <option value="staff4">Staff 4</option>
+      <option value="staff5">Staff 5</option>
+      <option value="staff6">Staff 6</option>
+      <option value="staff7">Staff 7</option>
+    </select>
+  </div>
+
+  <button id="save-schedule">Save Schedule</button>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="backend.js"></script>
+</body>
+</html>
