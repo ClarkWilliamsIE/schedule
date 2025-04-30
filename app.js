@@ -1,4 +1,4 @@
-// Firebase config
+// Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCKSQ9w5hLdz1DPxFe81rchy37wwllzzOw",
   authDomain: "makerspace-timetable.firebaseapp.com",
@@ -10,7 +10,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
