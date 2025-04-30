@@ -18,17 +18,29 @@ const timeBlocks = document.querySelectorAll('.time-block');
 const staffSelector = document.getElementById('staff');
 const saveButton = document.getElementById('save-schedule');
 
+// Staff color coding (assigning a color to each staff member)
+const staffColors = {
+  "staff1": "#FF5733", // Red
+  "staff2": "#33FF57", // Green
+  "staff3": "#3357FF", // Blue
+  "staff4": "#F0E130", // Yellow
+  "staff5": "#8E44AD", // Purple
+  "staff6": "#FF8C00", // Orange
+  "staff7": "#2ECC71"  // Teal
+};
+
 // Set up click listener for time blocks
 timeBlocks.forEach(block => {
   block.addEventListener('click', () => {
     const staffMember = staffSelector.value;
     block.textContent = `${block.getAttribute('data-time')} - ${staffMember}`;
+    block.style.backgroundColor = staffColors[staffMember];
     
     // Save to Firestore
     const day = block.parentElement.id;
     const time = block.getAttribute('data-time');
     db.collection('schedule').doc(day).set({
-      [time]: staffMember
+      [time]: { name: staffMember, color: staffColors[staffMember] }
     }, { merge: true });
   });
 });
