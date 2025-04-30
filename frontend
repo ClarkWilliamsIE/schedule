@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Week Planner (View Only)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Staff Week Planner (View Only)</h1>
+
+  <div id="week-planner">
+    <div id="days-of-week">
+      <div class="day" id="monday">Monday</div>
+      <div class="day" id="tuesday">Tuesday</div>
+      <div class="day" id="wednesday">Wednesday</div>
+      <div class="day" id="thursday">Thursday</div>
+      <div class="day" id="friday">Friday</div>
+      <div class="day" id="saturday">Saturday</div>
+      <div class="day" id="sunday">Sunday</div>
+    </div>
+
+    <div id="time-blocks">
+      <div class="time-block" data-time="08:00 - 10:00">08:00 - 10:00</div>
+      <div class="time-block" data-time="10:00 - 12:00">10:00 - 12:00</div>
+      <div class="time-block" data-time="12:00 - 14:00">12:00 - 14:00</div>
+      <div class="time-block" data-time="14:00 - 16:00">14:00 - 16:00</div>
+      <div class="time-block" data-time="16:00 - 18:00">16:00 - 18:00</div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="frontend.js"></script>
+</body>
+</html>
