@@ -1,33 +1,125 @@
+/* General reset for some default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
   text-align: center;
+  padding: 20px;
 }
 
-#calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  margin-top: 20px;
+/* Title Styling */
+h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.day {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #ccc;
-  cursor: pointer;
+/* Container for Week Planner */
+#week-planner {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  margin-top: 20px;
+  gap: 15px;
 }
 
-.available {
-  background-color: lightgreen;
+/* Days of the Week */
+#days-of-week {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 20px;
 }
 
-.unavailable {
-  background-color: lightcoral;
+/* Styling for each day */
+.day {
+  background-color: #444;
+  color: white;
+  font-size: 1.2em;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
 }
 
-.selected {
-  background-color: #4caf50;
+/* Time Blocks */
+#time-blocks {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  max-width: 800px;
+}
+
+/* Styling for each time block */
+.time-block {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  font-weight: bold;
+  min-height: 100px;
+}
+
+.time-block:hover {
+  background-color: #e6e6e6;
+}
+
+.time-block:active {
+  background-color: #d1d1d1;
+}
+
+/* Dropdown for Staff Selection */
+#staff-selector {
+  margin: 20px 0;
+}
+
+#staff {
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+}
+
+/* Save Button */
+#save-schedule {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#save-schedule:hover {
+  background-color: #4cae4c;
+}
+
+/* View-Only Styling */
+#view-only {
+  margin-top: 50px;
+  font-size: 1.2em;
+  color: #444;
+}
+
+/* Make everything mobile-friendly */
+@media (max-width: 768px) {
+  #week-planner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #time-blocks {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
