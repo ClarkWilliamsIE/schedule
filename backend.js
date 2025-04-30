@@ -51,13 +51,25 @@ days.forEach(day => {
     // Add click listener to each time block
     timeBlock.addEventListener('click', () => {
       const staffMember = staffSelector.value;
-      timeBlock.style.backgroundColor = staffColors[staffMember];
-      timeBlock.textContent = `${timeSlot} - ${staffMember}`;
 
-      // Save to Firestore
+      // Get the current time block and check if the staff member is already assigned
+      const currentStaff = timeBlock.getAttribute('data-staff') ? timeBlock.getAttribute('data-staff').split(', ') : [];
+
+      if (!currentStaff.includes(staffMember)) {
+        currentStaff.push(staffMember); // Add the new staff member to the list
+        timeBlock.style.backgroundColor = staffColors[staffMember];
+        timeBlock.textContent = `${timeSlot} - ${currentStaff.join(', ')}`;
+      } else {
+        alert(`${staffMember} is already assigned to this time block.`);
+      }
+
+      // Save multiple staff members to Firestore
       db.collection('schedule').doc(day).set({
-        [timeSlot]: { name: staffMember, color: staffColors[staffMember] }
+        [timeSlot]: { staff: currentStaff, colors: currentStaff.map(member => staffColors[member]) }
       }, { merge: true });
+      
+      // Store the staff member names as a comma-separated string in the `data-staff` attribute
+      timeBlock.setAttribute('data-staff', currentStaff.join(', '));
     });
   });
 });
