@@ -14,9 +14,8 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Get elements
-const timeBlocks = document.querySelectorAll('.time-block');
-const staffSelector = document.getElementById('staff');
 const saveButton = document.getElementById('save-schedule');
+const staffSelector = document.getElementById('staff');
 
 // Staff color coding (assigning a color to each staff member)
 const staffColors = {
@@ -29,15 +28,20 @@ const staffColors = {
   "staff7": "#2ECC71"  // Teal
 };
 
-// Set up click listener for time blocks
-const dayBlocks = document.querySelectorAll('.day-block');
+// Generate time slots for the week (Monday to Friday)
+const timeSlots = [
+  "09:00 - 09:30", "09:30 - 10:00", "10:00 - 10:30", "10:30 - 11:00",
+  "11:00 - 11:30", "11:30 - 12:00", "12:00 - 12:30", "12:30 - 13:00",
+  "13:00 - 13:30", "13:30 - 14:00", "14:00 - 14:30", "14:30 - 15:00",
+  "15:00 - 15:30", "15:30 - 16:00", "16:00 - 16:30", "16:30 - 17:00"
+];
 
-dayBlocks.forEach(dayBlock => {
-  const day = dayBlock.id; // e.g., "monday"
+// Create time blocks for each day (Monday to Friday)
+const days = ["monday", "tuesday", "wednesday", "thursday", "friday"];
+days.forEach(day => {
+  const dayBlock = document.getElementById(day);
 
-  // Generate time blocks for each day
-  for (let i = 9; i < 18; i++) {
-    const timeSlot = `${i}:00 - ${i+1}:00`;
+  timeSlots.forEach(timeSlot => {
     const timeBlock = document.createElement('div');
     timeBlock.classList.add('time-block');
     timeBlock.setAttribute('data-time', timeSlot);
@@ -49,13 +53,13 @@ dayBlocks.forEach(dayBlock => {
       const staffMember = staffSelector.value;
       timeBlock.style.backgroundColor = staffColors[staffMember];
       timeBlock.textContent = `${timeSlot} - ${staffMember}`;
-      
+
       // Save to Firestore
       db.collection('schedule').doc(day).set({
         [timeSlot]: { name: staffMember, color: staffColors[staffMember] }
       }, { merge: true });
     });
-  }
+  });
 });
 
 // Save schedule button (if you want to save the entire week at once)
