@@ -25,14 +25,16 @@ days.forEach(day => {
     const daySchedule = doc.data();
 
     for (let time in daySchedule) {
-      const staffMember = daySchedule[time].name;
-      const color = daySchedule[time].color;
+      const staffMembers = daySchedule[time].staff;
+      const colors = daySchedule[time].colors;
 
       const timeBlock = document.createElement('div');
       timeBlock.classList.add('time-block');
       timeBlock.setAttribute('data-time', time);
-      timeBlock.textContent = `${time} - ${staffMember}`;
-      timeBlock.style.backgroundColor = color;
+      
+      // Display all staff members assigned to the time block
+      timeBlock.textContent = `${time} - ${staffMembers.join(', ')}`;
+      timeBlock.style.backgroundColor = colors.join(', ');  // Join all staff colors as a gradient
 
       dayBlock.appendChild(timeBlock);
     }
