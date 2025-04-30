@@ -30,23 +30,35 @@ const staffColors = {
 };
 
 // Set up click listener for time blocks
-timeBlocks.forEach(block => {
-  block.addEventListener('click', () => {
-    const staffMember = staffSelector.value;
-    block.textContent = `${block.getAttribute('data-time')} - ${staffMember}`;
-    block.style.backgroundColor = staffColors[staffMember];
-    
-    // Save to Firestore
-    const day = block.parentElement.id;
-    const time = block.getAttribute('data-time');
-    db.collection('schedule').doc(day).set({
-      [time]: { name: staffMember, color: staffColors[staffMember] }
-    }, { merge: true });
-  });
+const dayBlocks = document.querySelectorAll('.day-block');
+
+dayBlocks.forEach(dayBlock => {
+  const day = dayBlock.id; // e.g., "monday"
+
+  // Generate time blocks for each day
+  for (let i = 9; i < 18; i++) {
+    const timeSlot = `${i}:00 - ${i+1}:00`;
+    const timeBlock = document.createElement('div');
+    timeBlock.classList.add('time-block');
+    timeBlock.setAttribute('data-time', timeSlot);
+    timeBlock.textContent = timeSlot;
+    dayBlock.appendChild(timeBlock);
+
+    // Add click listener to each time block
+    timeBlock.addEventListener('click', () => {
+      const staffMember = staffSelector.value;
+      timeBlock.style.backgroundColor = staffColors[staffMember];
+      timeBlock.textContent = `${timeSlot} - ${staffMember}`;
+      
+      // Save to Firestore
+      db.collection('schedule').doc(day).set({
+        [timeSlot]: { name: staffMember, color: staffColors[staffMember] }
+      }, { merge: true });
+    });
+  }
 });
 
 // Save schedule button (if you want to save the entire week at once)
 saveButton.addEventListener('click', () => {
   alert("Schedule saved successfully!");
 });
-
